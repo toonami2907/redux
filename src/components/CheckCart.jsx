@@ -1,20 +1,13 @@
-import React from 'react'
+import { Trash } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { removeFromLocalStorageArray } from '../utils/Index'
 
-const Products = [
-    { name: "Plain Grey Unisex Hoodie", img: "/Rectangle 53 (1).png" },
-    { name: "Sky Stock Blue Jean For Men", img: "/Rectangle 53.png" },
-    {
-      name: "Osc Signature MENS Quality  R-Neck V-Neck T-Shirts Long Sleeve",
-      img: "/WIDE-LEG WOOL TROUSERS 1 (1).png",
-    },
-    {
-      name: "Dark Grey Summer Short And Beach Wear",
-      img: "/WIDE-LEG WOOL TROUSERS 2 (2).png",
-    },]
-export default function CheckCart() {
+export default function CheckCart({cartitems}) {
+
+
   return (
     <div>
-        {Array.isArray(Products) && Products.map((item, idx)=> (
+        {Array.isArray(cartitems) && cartitems.map((item, idx)=> (
             <li key={idx} className="py-6 flex space-x-6">
             <img
               src={item.img}
@@ -25,7 +18,10 @@ export default function CheckCart() {
               <div className="space-y-1 sm:flex sm:items-start sm:justify-between sm:space-x-6">
                 <div className="flex-auto flex flex-col justify-center text-sm font-medium space-y-1">
                   <h3 className="text-gray-600 text-xs">{item.name}</h3>
-                  <p className="text-gray-900 text-sm">Price: $20</p>
+                  <p className="text-gray-900 text-sm">${item.Price}</p>
+                  <button 
+                     onClick={()=>removeFromLocalStorageArray("cart", item.id)}
+                      className='flex item-center text-red-600'><Trash size={20}/></button>
                 </div>
               </div>
             </div>

@@ -1,18 +1,60 @@
-import { Heart } from 'lucide-react'
-import React from 'react'
+import React, { useEffect, useState } from "react";
+import { Products } from "./Product"; // Assuming Products is imported correctly
+import { Productwo } from "./Product2";
 
-export default function Product_Card({product}) {
+export default function Product_Card({ product }) {
+  const [cartList, setCartList] = useState([]);
+
+  useEffect(() => {
+    const cartLocalStorage = JSON.parse(
+      localStorage.getItem("cartList") || "[]"
+    );
+    setCartList(cartLocalStorage);
+  }, []); 
+
+  useEffect(() => {
+    localStorage.setItem("cartList", JSON.stringify(cartList));
+  }, [cartList]);
+
+  const FindProductById = (id) => {
+    if(id <= 10){
+      return Products.find((item) => item.id === id);
+    }
+    return Productwo.find((item) => item.id === id);    
+  };
+
+  const AddtoCart = (id) => {
+    const product = FindProductById(id);
+    console.log(product);
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const isExisted = cart.some((item) => item.id === product.id);
+    if (isExisted) {
+      return console.log(`product is already in the cart`);
+    }
+    cart.push(product);
+    localStorage.setItem("cart", JSON.stringify(cart));
+  };
+
   return (
-    <div className='flex flex-col mx-auto md:mx-0 gap-2 gap-y-5'>
-      <div className='relative  bg-gray-100 md:h-[300px] md:w-[220px] w-[300px]  h-[350px] '>
-        <img src={product.img} alt="" className='absolute top-0 w-full h-full' />
-        <button className='absolute bottom-1 bg-white/85 right-1 p-2 font-light'><Heart/></button>
+    <div className="flex flex-col h-[500px] mx-auto md:mx-0 gap-2 gap-y-5">
+      <div className="bg-gray-100 ">
+        <img
+          src={product.img}
+          alt=""
+          className=" md:h-[300px] md:w-[220px] object-cover object-center w-[300px] h-[300px]"
+        />
       </div>
-      <div className='flex flex-col gap-1'>
-      <p className='text-sm w-[250px] md:w-[220px]'>{product.name}</p>
-      <p className='text-xs text-gray-700'>All sizes available</p>
-      <p className='text-xs'>$8,500</p>
+      <div className="flex flex-col gap-1 ">
+        <p className="text-xs">{product.name}</p>
+        <p className="text-xs text-gray-700">All sizes available</p>
+        <p className="text-xs">${product.Price || 50}</p>
+        <button
+          onClick={() => AddtoCart(product.id)}
+          className="bg-black text-white p-2 text-xs md:text-sm font-light"
+        >
+          <p>Add to cart</p>
+        </button>
       </div>
     </div>
-  )
+  );
 }

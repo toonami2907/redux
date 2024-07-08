@@ -17,9 +17,15 @@ const Navigation = [
 
 export const Navbar2 = () => {
   const [searchbox, setSearchbox] = useState(false);
+  const [cartitems, setCartitems]= useState([])
   const [cart, setCart] = useState(false);
   const [open, setOpen] = useState(false);
 
+  useEffect(()=>{
+    const cartLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCartitems(cartLocalStorage)
+  },[])
+  const cartnumber = cartitems.length
   const handleInput = () => {
     setSearchbox(true);
   };
@@ -30,10 +36,8 @@ export const Navbar2 = () => {
 
   return (
     <div className="h-full">
-      <nav className="w-full py-4  LinkStyles flex relative justify-between items-center px-3  lg:px-10 bg-white">
-        <li className="text-2xl LinkStyles font-['unbounded-bold'] text-black ">
-          TIMBU
-        </li>
+      <nav className="w-full py-4  LinkStyles flex relative justify-between items-center px-3  lg:px-10 bg-white">  
+          <Link to="/" className="text-2xl LinkStyles font-['unbounded-bold'] text-black "> TIMBU</Link>
         {/* DESKTOP NAVIGATION */}
         <ul className="lg:flex gap-5 items-center ml-3 lg:w-[30%]  hidden">
           {Navigation.map((navitem, idx) => (
@@ -57,8 +61,8 @@ export const Navbar2 = () => {
         </div>
         <div className="flex gap-3">
           <div className="md:flex items-center">
-            <button className="hover:bg-gray-300 px-2 h-10 rounded-full">
-              <UserRound />
+            <button className="hover:bg-gray-300 px-2 h-10 lg:hidden rounded-full">
+              <Search/>
             </button>
             <button
               onClick={() => setCart(!cart)}
@@ -66,7 +70,7 @@ export const Navbar2 = () => {
             >
               <ShoppingBagIcon />
               <span className="absolute text-xs px-2 py-1 -top-1 rounded-full text-white bg-purple-800 -right-1">
-                4
+              {cartnumber}
               </span>
             </button>
             {cart ? (

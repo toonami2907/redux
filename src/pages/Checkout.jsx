@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import DeliveryInfo from "../components/DeliveryInfo";
 import DeliveryMethod from "../components/DeliveryMethod";
-import Cart from "../components/Cart";
+import Cart, { calculateTotal } from "../components/Cart";
 import CheckCart from "../components/CheckCart";
 
 export default function Checkout() {
+  const [cartitems, setCart]= useState([])
+  console.log(cartitems);
+  useEffect(()=>{
+    const cartLocalStorage = JSON.parse(localStorage.getItem("cart") || "[]");
+    setCart(cartLocalStorage)
+  },[])
   return (
     <div className="md:px-10 px-5 py-5">
       <section className="h-screen w-full py-2 flex items-center justify-center">
@@ -30,12 +36,12 @@ export default function Checkout() {
               <p>edit</p>
             </div>
             <div className="lg:max-h-full h-full lg:h-[350px] lg:overflow-y-auto ">
-              <CheckCart />
+              <CheckCart cartitems={cartitems} />
             </div>
             <section className=" border-b-2 md:border-t-2 py-3 flex gap-5 flex-col border-gray-200">
               <div className="flex justify-between text-xs text-gray-700 py-2">
-                <p>4 items</p>
-                <p>$80.00</p>
+                <p>{cartitems && cartitems.length} items</p>
+                <p>${calculateTotal(cartitems)}</p>
               </div>
               <div className="flex justify-between text-xs text-gray-700 ">
                 <p>Delivery</p>
@@ -44,7 +50,7 @@ export default function Checkout() {
             </section>
             <div className="flex justify-between text-sm font-bold py-5 ">
                 <p>Total to pay:</p>
-                <p>$85.00</p>
+                <p>${calculateTotal(cartitems) + 5}</p>
             </div>
             <button className="bg-black text-white w-full py-2">Pay</button>
           </div>
