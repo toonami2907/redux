@@ -8,6 +8,18 @@
     font-family:  "unbounded";
     list-style-type: none;
 }
+@layer utilities {
+    .Footer{
+        @apply flex flex-col gap-2 md:text-sm text-xs  text-gray-600 border-b md:border-0 md:pb-0 pb-2 
+    }
+    .Footer-li{
+        @apply font-["unbounded-bold"] flex items-center justify-between text-gray-700
+    }
+    
+}
+
+
+
 
 
 @font-face {

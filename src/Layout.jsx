@@ -6,7 +6,7 @@ import MiniFooter from './components/MiniFooter'
 
 export default function Layout() {
   return (
-    <div>
+    <div className='bg-gray-50'>
         <Navbar2/>
         <Outlet/>
         <Footer/>

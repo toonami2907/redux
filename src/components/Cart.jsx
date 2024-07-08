@@ -1,6 +1,7 @@
 import React from 'react'
 import Product from '../sections/Product'
 import { Minus, Plus } from 'lucide-react'
+import { Link } from 'react-router-dom'
 
 
 const Products = [
@@ -14,11 +15,10 @@ const Products = [
       name: "Dark Grey Summer Short And Beach Wear",
       img: "/WIDE-LEG WOOL TROUSERS 2 (2).png",
     },]
-export default function Cart() {
+export default function Cart({setOpen, open}) {
   return (
     <div className="w-full x-4 pt-4 pb-16 sm:pt-8 sm:pb-24 xl:pt-14">
     <div className="max-w-lg mx-auto w-full">
-      <h2 className="sr-only">Order summary</h2>
       <div className="flow-root overflow-y-auto max-h-[650px] h-[430px] md:h-[500px]">
       <ul role="list" className="-my-6 divide-y divide-gray-200">
           {Array.isArray(Product) && Product.length === 0 ? (
@@ -68,8 +68,10 @@ export default function Cart() {
         </div>
       </dl>
       <div className="w-full pt-5">
-          <button className="bg-black w-full rounded-md py-3 text-white text-lg">     
-              Checkout
+          <button
+          onClick={()=>setOpen(!open)} 
+          className="bg-black w-full rounded-md py-3 text-white text-lg">     
+              <Link to='/Checkout'>Checkout</Link>
           </button>
       </div>
     </div>

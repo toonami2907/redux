@@ -8,13 +8,11 @@ import {
   X,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import CartCard from "../sections/CartCard";
 import Cart from "./Cart";
 
 const Navigation = [
   { name: "Men", to: "/" },
   { name: "Women", to: "/Women" },
-  { name: "Unisex", to: "#" },
 ];
 
 export const Navbar2 = () => {
@@ -81,14 +79,14 @@ export const Navbar2 = () => {
                   <button
                     onClick={() => setCart(!cart)}
                     type="button"
-                    className="absolute top-4 lg:right-10 right-5 px-2 h-10 rounded-full hover:bg-gray-300"
+                    className="absolute top-2 lg:right-10 right-4 px-2 h-10 rounded-full"
                   >
                     <X size={25} />
                   </button>
                   {/* Cart */}
                 <div className="pt-12">
-                  <h1 className="text-center">CART ITEMS</h1>
-                <Cart/>
+                  <h1 className="text-center bg-black text-white py-2">CART ITEMS</h1>
+                <Cart setOpen={setCart} open={cart}/>
                 </div>
                 </div>
               </div>
