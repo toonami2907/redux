@@ -23,7 +23,7 @@ export default function Cart({setOpen, open}) {
   return (
     <div className="w-full x-4 pt-4 pb-16 sm:pt-8 sm:pb-24 xl:pt-14">
     <div className="w-full">     
-      <div className="flow-root overflow-y-auto max-h-[650px] h-[400px] md:h-[370px] lg:h-[400px]">
+      <div className="flow-root overflow-y-auto max-h-[650px] h-[400px] md:h-[370px]">
       <ul role="list" className="-my-6 divide-y divide-gray-200">
           {Array.isArray(cartitems) && cartitems.length === 0 ? (
             <h1 className="text-3xl py-5">NO ITEM. ADD ITEMS</h1>
