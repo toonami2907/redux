@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Products } from "./Product"; // Assuming Products is imported correctly
 import { Productwo } from "./Product2";
+import { ShoppingBag } from "lucide-react";
 
 export default function Product_Card({ product }) {
   const [cartList, setCartList] = useState([]);
@@ -37,23 +38,24 @@ export default function Product_Card({ product }) {
 
   return (
     <div className="flex flex-col h-[500px] mx-auto md:mx-0 gap-2 gap-y-5">
-      <div className="bg-gray-100 ">
+      <div className="bg-gray-100 relative">
         <img
           src={product.img}
           alt=""
           className=" md:h-[300px] md:w-[220px] object-cover object-center w-[300px] h-[300px]"
         />
+        <button
+          onClick={() => AddtoCart(product.id)}
+        className="absolute bottom-1 bg-gray-200/70 p-2 right-2"
+        >
+         <ShoppingBag/>
+        </button>
       </div>
       <div className="flex flex-col gap-1 ">
         <p className="text-xs">{product.name}</p>
         <p className="text-xs text-gray-700">All sizes available</p>
         <p className="text-xs">${product.Price || 50}</p>
-        <button
-          onClick={() => AddtoCart(product.id)}
-          className="bg-black text-white p-2 text-xs md:text-sm font-light"
-        >
-          <p>Add to cart</p>
-        </button>
+        
       </div>
     </div>
   );

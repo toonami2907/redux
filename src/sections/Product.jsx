@@ -92,7 +92,7 @@ export default function Product() {
         <h1 className="text-2xl font-bold">All items</h1>
         <p className="text-xs">245 items</p>
         <div className="py-5">
-          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 gap-y-10 grid-cols-2 sm:grid-cols-2 h-full">
+          <div className="grid md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4  grid-cols-2 sm:grid-cols-2 h-full">
             {Products.map((item, idx) => (
               <Product_Card product={item} key={idx} />
             ))}

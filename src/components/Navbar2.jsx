@@ -36,8 +36,17 @@ export const Navbar2 = () => {
 
   return (
     <div className="h-full">
-      <nav className="w-full py-4  LinkStyles flex relative justify-between items-center px-3  lg:px-10 bg-white">  
+      <nav className="w-full py-4  LinkStyles flex relative justify-between items-center px-3  lg:px-10 bg-white">
+        <div className="flex items-center">
+        <button
+            onClick={() => setOpen(!open)}
+            className="lg:hidden hover:bg-gray-300 pr-2 h-10 rounded-full"
+          >
+            <Menu />
+          </button>  
           <Link to="/" className="text-2xl LinkStyles font-['unbounded-bold'] text-black "> TIMBU</Link>
+        </div>
+    
         {/* DESKTOP NAVIGATION */}
         <ul className="lg:flex gap-5 items-center ml-3 lg:w-[30%]  hidden">
           {Navigation.map((navitem, idx) => (
@@ -59,10 +68,13 @@ export const Navbar2 = () => {
             </button>
           </form>
         </div>
-        <div className="flex gap-3">
+        <div className="flex gap-2">
           <div className="md:flex items-center">
             <button className="hover:bg-gray-300 px-2 h-10 lg:hidden rounded-full">
               <Search/>
+            </button>
+            <button className="hover:bg-gray-300 px-2 h-10 lg:hidden rounded-full">
+              <UserRound/>
             </button>
             <button
               onClick={() => setCart(!cart)}
@@ -98,12 +110,7 @@ export const Navbar2 = () => {
               ""
             )}
           </div>
-          <button
-            onClick={() => setOpen(!open)}
-            className="lg:hidden hover:bg-gray-300 px-2 h-10 rounded-full"
-          >
-            <Menu />
-          </button>
+          
         </div>
         {/* MOBILE DEVICE NAVIGATION */}
         <div
