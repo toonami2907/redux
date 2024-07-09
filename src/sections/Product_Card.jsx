@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Products } from "./Product"; // Assuming Products is imported correctly
 import { Productwo } from "./Product2";
 import { ShoppingBag } from "lucide-react";
-import {toast}  from 'react-hot-toast'
+import toast  from 'react-hot-toast'
 
 export default function Product_Card({ product }) {
   const [cartList, setCartList] = useState([]);
