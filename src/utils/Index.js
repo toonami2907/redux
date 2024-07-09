@@ -1,3 +1,5 @@
+import toast from "react-hot-toast";
+
 export function removeFromLocalStorageArray(key, id) {
     // Retrieve the array from localStorage
     let items = JSON.parse(localStorage.getItem(key));
@@ -13,6 +15,7 @@ export function removeFromLocalStorageArray(key, id) {
   
     // Update the localStorage with the new array
     localStorage.setItem(key, JSON.stringify(items));
+    toast.success("Product remove from the Cart")
     window.location.reload()
   }
 
@@ -36,6 +39,7 @@ export function removeFromLocalStorageArray(key, id) {
   
     // Update the localStorage with the new array
     localStorage.setItem(key, JSON.stringify(items));
+    toast.success("Product Quantity Added Successfully")
     window.location.reload()
 
   }
@@ -59,6 +63,7 @@ export function removeFromLocalStorageArray(key, id) {
         }
         item.qty = (item.qty || 1) - 1; // Decrement qty, set to 0 if undefined
       }
+
       return item;
     });
   
@@ -67,6 +72,7 @@ export function removeFromLocalStorageArray(key, id) {
     localStorage.setItem(key, JSON.stringify(items));
    const qty =  items.map(i=>{return i.qty})
    if (qty != 1) {
+    toast.success("Product reduced sucessfully")
    window.location.reload()
    }
   }

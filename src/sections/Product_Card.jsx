@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Products } from "./Product"; // Assuming Products is imported correctly
 import { Productwo } from "./Product2";
 import { ShoppingBag } from "lucide-react";
+import {toast}  from 'react-hot-toast'
 
 export default function Product_Card({ product }) {
   const [cartList, setCartList] = useState([]);
@@ -30,10 +31,11 @@ export default function Product_Card({ product }) {
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const isExisted = cart.some((item) => item.id === product.id);
     if (isExisted) {
-      return console.log(`product is already in the cart`);
+      return toast.error(`product is already in the cart`);
     }
     cart.push(product);
     localStorage.setItem("cart", JSON.stringify(cart));
+    toast.success("Product added to Cart")
   };
 
   return (
