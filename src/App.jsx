@@ -1,14 +1,15 @@
 import React from 'react'
-import Hero from './sections/Hero'
-import Product from './sections/Product'
-import SmHero from './sections/SmHero'
+import AddToDo from './components/AddToDo'
+import Todos from './components/Todos'
 
-export default function App() {
+
+const App = () => {
   return (
-    <div className='flex flex-col gap-2'>
-      <Hero/>
-      <SmHero/>
-      <Product/>
+    <div className='max-w-2xl mx-auto h-screen flex flex-col justify-center items-center'>
+      <AddToDo />
+      <Todos/>
     </div>
   )
 }
+
+export default App
