@@ -104,31 +104,31 @@ const Profile = () => {
   if (!user) return null;
 
   return (
-    <div className="container mx-auto py-8 px-4 font-[unbounded]">
-      <div className="max-w-3xl mx-auto space-y-6">
+    <div className="container mx-auto py-4 sm:py-8 px-2 sm:px-4 font-[unbounded]">
+      <div className="max-w-3xl mx-auto space-y-4 sm:space-y-6">
         {/* Profile Header */}
         <Card className="border-none shadow-none bg-gradient-to-r from-blue-500 to-purple-500 text-white">
           <CardHeader>
-            <div className="flex items-center gap-6">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
               <div className="relative">
-                <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center">
-                  <User className="w-12 h-12" />
+                <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-white/20 flex items-center justify-center">
+                  <User className="w-10 h-10 sm:w-12 sm:h-12" />
                 </div>
               </div>
-              <div>
-                <h1 className="text-2xl font-[unbounded-bold]">
+              <div className="text-center sm:text-left">
+                <h1 className="text-xl sm:text-2xl font-[unbounded-bold]">
                   {user.firstName
                     ? `${user.firstName} ${user.lastName}`
                     : user.email}
                 </h1>
-                <p className="text-white/80">Member since {new Date().toLocaleDateString()}</p>
+                <p className="text-white/80 text-sm sm:text-base">Member since {new Date().toLocaleDateString()}</p>
               </div>
             </div>
           </CardHeader>
         </Card>
 
         {/* Quick Stats */}
-        <div className="grid gap-4 md:grid-cols-3 [&_Card]:font-[unbounded]">
+        <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 [&_Card]:font-[unbounded]">
           <Card>
             <CardHeader className="space-y-0 pb-2">
               <CardTitle className="text-sm font-[unbounded-bold]">Email</CardTitle>
@@ -166,15 +166,15 @@ const Profile = () => {
 
         {/* Profile Form */}
         <Card>
-          <CardHeader>
-            <CardTitle className='font-[unbounded-bold]'>Profile Details</CardTitle>
-            <CardDescription className='font-[unbounded-medium]'>
+          <CardHeader className="space-y-2">
+            <CardTitle className='font-[unbounded-bold] text-lg sm:text-xl'>Profile Details</CardTitle>
+            <CardDescription className='font-[unbounded-medium] text-sm'>
               Update your profile information
             </CardDescription>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleUpdateProfile} className="space-y-4">
-              <div className="grid gap-4 md:grid-cols-2">
+              <div className="grid gap-4 grid-cols-1 md:grid-cols-2">
                 <div className="space-y-2 font-[unbounded-bold]">
                   <Label htmlFor="firstName">First Name</Label>
                   <Input
@@ -232,12 +232,12 @@ const Profile = () => {
               )}
             </form>
           </CardContent>
-          <CardFooter className="flex justify-between">
+          <CardFooter className="flex flex-col sm:flex-row gap-3 sm:gap-0 sm:justify-between">
             {isEditing ? (
               <>
                 <Button
                   variant="outline"
-                  className='font-[unbounded-bold]'
+                  className='font-[unbounded-bold] w-full sm:w-auto'
                   onClick={() => setIsEditing(false)}
                   disabled={loading}
                 >
@@ -246,6 +246,7 @@ const Profile = () => {
                 <Button
                   onClick={handleUpdateProfile}
                   disabled={loading}
+                  className="w-full sm:w-auto"
                 >
                   {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
                   Save Changes
@@ -255,14 +256,14 @@ const Profile = () => {
               <>
                 <Button
                   variant="outline"
-                  className='font-[unbounded-bold]'
+                  className='font-[unbounded-bold] w-full sm:w-auto'
                   onClick={handleLogout}
                 >
-                  <LogOut className="mr-2 h-4 w-4 " />
+                  <LogOut className="mr-2 h-4 w-4" />
                   Logout
                 </Button>
                 <Button
-                className='font-[unbounded-bold]'
+                  className='font-[unbounded-bold] w-full sm:w-auto'
                   onClick={() => setIsEditing(true)}
                 >
                   Edit Profile
@@ -275,13 +276,13 @@ const Profile = () => {
         {/* Add this card at the end, after the Profile Form card */}
         <Card className="mt-6 border-red-100">
           <CardHeader>
-            <CardTitle className="text-red-600 font-[unbounded-bold]">Danger Zone</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-red-600 font-[unbounded-bold] text-lg sm:text-xl">Danger Zone</CardTitle>
+            <CardDescription className="text-sm">
               Actions here cannot be undone
             </CardDescription>
           </CardHeader>
           <CardContent>
-            <div className="flex items-center justify-between p-4 border rounded-lg border-red-200 bg-red-50">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 sm:p-4 border rounded-lg border-red-200 bg-red-50 gap-3 sm:gap-0">
               <div className="space-y-1">
                 <h4 className='font-[unbounded-bold]'>Delete Account</h4>
                 <p className="text-sm text-gray-500">
@@ -290,9 +291,11 @@ const Profile = () => {
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <Button variant="destructive"
-                  className='font-[unbounded-bold]'
-                  disabled={isDeleting}>
+                  <Button 
+                    variant="destructive"
+                    className='font-[unbounded-bold] w-full sm:w-auto'
+                    disabled={isDeleting}
+                  >
                     {isDeleting ? (
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
                     ) : (
